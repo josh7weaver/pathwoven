@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pathwoven | Human-Centered Tech Consulting & Systems Design</title>
+  <meta name="description" content="Pathwoven weaves clarity into complex systems. Human-centered technology consulting, wayfinding, and calm systems design with 15+ years of experience.">
+  <meta name="author" content="Pathwoven">
+  
+  <meta property="og:title" content="Pathwoven — Story, Systems, and Journey">
+  <meta property="og:description" content="Human-centered technology consulting. Weaving clarity into complex systems.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --background: hsl(40 30% 96%);
+      --foreground: hsl(160 25% 15%);
+      --card: hsl(40 25% 94%);
+      --card-foreground: hsl(160 25% 15%);
+      --primary: hsl(158 35% 25%);
+      --primary-foreground: hsl(40 30% 96%);
+      --secondary: hsl(40 20% 90%);
+      --secondary-foreground: hsl(160 25% 20%);
+      --muted: hsl(40 15% 88%);
+      --muted-foreground: hsl(160 10% 45%);
+      --accent: hsl(18 60% 55%);
+      --accent-foreground: hsl(40 30% 96%);
+      --border: hsl(40 15% 85%);
+      --radius: 0.75rem;
+      --font-display: 'Lora', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --gradient-warm: linear-gradient(135deg, hsla(18, 60%, 55%, 0.1) 0%, hsla(40, 30%, 96%, 0) 60%);
+      --shadow-card: 0 2px 12px hsla(160, 25%, 15%, 0.04);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: var(--gradient-warm);
+      opacity: 0.6;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .hero-path {
+      position: absolute;
+      right: 0;
+      top: 25%;
+      width: 16rem;
+      height: 24rem;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    .hero-path path {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: drawPath 1.5s ease-out forwards;
+    }
+
+    .hero-path path:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .brand-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-icon svg {
+      width: 1rem;
+      height: 1rem;
+      color: var(--primary-foreground);
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      letter-spacing: 0.025em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      line-height: 1.15;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: 0.1s;
+    }
+
+    .hero h1 .highlight {
+      color: var(--primary);
+    }
+
+    .hero-tagline {
+      font-size: 1.125rem;
+      color: var(--muted-foreground);
+      max-width: 36rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: 0.2s;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: 0.3s;
+    }
+
+    .hero-divider span {
+      height: 1px;
+      width: 3rem;
+      background: var(--border);
+    }
+
+    .hero-divider p {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      letter-spacing: 0.025em;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: 0.4s;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 1.75rem;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      font-weight: 500;
+      border-radius: 9999px;
+      transition: opacity 0.3s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-text {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 1.75rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .btn-text:hover {
+      color: var(--primary);
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-label span:first-child {
+      width: 2rem;
+      height: 1px;
+      background: var(--primary);
+    }
+
+    .section-label span:last-child {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .section-grid {
+        grid-template-columns: 2fr 3fr;
+        gap: 4rem;
+      }
+    }
+
+    section h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      line-height: 1.3;
+    }
+
+    section h2 .highlight {
+      color: var(--primary);
+    }
+
+    .section-text {
+      color: var(--muted-foreground);
+      line-height: 1.8;
+    }
+
+    .section-text p + p {
+      margin-top: 1.5rem;
+    }
+
+    .section-text p:first-child {
+      font-size: 1.125rem;
+    }
+
+    /* Card Section */
+    .bg-card {
+      background: var(--card);
+    }
+
+    /* Approach Grid */
+    .approach-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .approach-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+      }
+    }
+
+    .pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .pillar-icon {
+      padding: 0.625rem;
+      border-radius: 0.5rem;
+      background: var(--background);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+
+    .pillar:hover .pillar-icon {
+      border-color: hsla(158, 35%, 25%, 0.3);
+    }
+
+    .pillar-icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .pillar-content h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-content p {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      line-height: 1.7;
+    }
+
+    /* Toolkit */
+    .capability {
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+
+    .capability:hover {
+      border-color: hsla(158, 35%, 25%, 0.3);
+    }
+
+    .capability + .capability {
+      margin-top: 1.5rem;
+    }
+
+    .capability-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .capability-inner {
+        flex-direction: row;
+        align-items: baseline;
+        gap: 1rem;
+      }
+    }
+
+    .capability-label {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+    }
+
+    .capability-tools {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    /* Contact */
+    .contact-intro {
+      margin-top: 1.5rem;
+      color: var(--muted-foreground);
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      background: var(--background);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+
+    .contact-link:hover {
+      border-color: hsla(158, 35%, 25%, 0.3);
+    }
+
+    .contact-link-inner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-link svg:first-child {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--primary);
+    }
+
+    .contact-link-text span {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted-foreground);
+    }
+
+    .contact-link-text p {
+      margin-top: 0.125rem;
+    }
+
+    .contact-link .arrow {
+      width: 1rem;
+      height: 1rem;
+      color: var(--muted-foreground);
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .contact-link:hover .arrow {
+      color: var(--primary);
+      transform: translate(2px, -2px);
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .footer-brand-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-brand-icon svg {
+      width: 0.75rem;
+      height: 0.75rem;
+      color: var(--primary-foreground);
+    }
+
+    .footer-brand span {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+    }
+
+    .footer-right {
+      text-align: left;
+    }
+
+    @media (min-width: 768px) {
+      .footer-right {
+        text-align: right;
+      }
+    }
+
+    .footer-right p {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    .footer-right p + p {
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes drawPath {
+      from {
+        stroke-dashoffset: 200;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <svg class="hero-path" viewBox="0 0 100 200" fill="none">
+      <path d="M80 0 C 60 50, 90 80, 50 100 C 10 120, 70 150, 40 200" stroke="hsl(158 35% 25%)" stroke-width="1"/>
+      <path d="M90 20 C 70 70, 100 100, 60 120 C 20 140, 80 170, 50 200" stroke="hsl(18 60% 55%)" stroke-width="0.5"/>
+    </svg>
+
+    <div class="container hero-content">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+            <path d="M2 17L12 22L22 17"/>
+            <path d="M2 12L12 17L22 12"/>
+          </svg>
+        </div>
+        <span class="brand-name">Pathwoven</span>
+      </div>
+
+      <h1>
+        Weaving clarity<br>
+        into complex<br>
+        <span class="highlight">systems.</span>
+      </h1>
+
+      <p class="hero-tagline">
+        Human-centered technology consulting. I help teams design calm, 
+        intuitive systems that guide users and scale with purpose.
+      </p>
+
+      <div class="hero-divider">
+        <span></span>
+        <p>15+ years of wayfinding</p>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Start a Conversation</a>
+        <a href="#approach" class="btn-text">How I Work →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">
+        <span></span>
+        <span>The Thread</span>
+      </div>
+
+      <div class="section-grid">
+        <div>
+          <h2>
+            Story, systems,<br>
+            <span class="highlight">& journey.</span>
+          </h2>
+        </div>
+
+        <div class="section-text">
+          <p>
+            I'm a senior developer and consultant with 15+ years bridging the gap 
+            between hands-on coding and strategic leadership. I don't just build — 
+            I weave outcomes.
+          </p>
+          <p>
+            From leading frontend strategy and coordinating cross-functional teams 
+            to designing federal reporting systems for USDA/FNS, my work centers 
+            on creating paths that feel natural to follow.
+          </p>
+          <p>
+            What sets Pathwoven apart: technical depth paired with genuine people 
+            skills. I mentor developers, translate complex requirements into clear 
+            solutions, and design systems that breathe.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section id="approach" class="bg-card">
+    <div class="container">
+      <div class="section-label">
+        <span></span>
+        <span>The Approach</span>
+      </div>
+
+      <h2 style="margin-bottom: 4rem;">
+        Four threads that<br>
+        <span class="highlight">guide every project.</span>
+      </h2>
+
+      <div class="approach-grid">
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+          </div>
+          <div class="pillar-content">
+            <h3>Wayfinding</h3>
+            <p>Designing intuitive paths through complex systems. Every interaction should feel like following a well-marked trail.</p>
+          </div>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+          </div>
+          <div class="pillar-content">
+            <h3>Systems Thinking</h3>
+            <p>Understanding how pieces connect. I architect solutions that scale gracefully and adapt to change.</p>
+          </div>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="pillar-content">
+            <h3>Human-Centered</h3>
+            <p>Technology serves people, not the other way around. I prioritize clarity, calm, and genuine utility.</p>
+          </div>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+              <path d="M19 3v4"/>
+              <path d="M21 5h-4"/>
+            </svg>
+          </div>
+          <div class="pillar-content">
+            <h3>Calm Systems</h3>
+            <p>Reducing noise, eliminating friction. Building products that feel restful to use, not exhausting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toolkit -->
+  <section id="toolkit">
+    <div class="container">
+      <div class="section-label">
+        <span></span>
+        <span>The Craft</span>
+      </div>
+
+      <div class="section-grid">
+        <div>
+          <h2>
+            Tools refined<br>
+            <span class="highlight">over 15+ years.</span>
+          </h2>
+        </div>
+
+        <div>
+          <div class="capability">
+            <div class="capability-inner">
+              <span class="capability-label">Frontend Architecture</span>
+              <span class="capability-tools">Vue.js, React, TypeScript</span>
+            </div>
+          </div>
+          <div class="capability">
+            <div class="capability-inner">
+              <span class="capability-label">Backend Systems</span>
+              <span class="capability-tools">Laravel, Ruby on Rails, Node.js</span>
+            </div>
+          </div>
+          <div class="capability">
+            <div class="capability-inner">
+              <span class="capability-label">Data & Infrastructure</span>
+              <span class="capability-tools">PostgreSQL, MySQL, AWS, Docker</span>
+            </div>
+          </div>
+          <div class="capability">
+            <div class="capability-inner">
+              <span class="capability-label">Process & Delivery</span>
+              <span class="capability-tools">Agile, Team Leadership, Technical Strategy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-card">
+    <div class="container">
+      <div class="section-label">
+        <span></span>
+        <span>The Path Forward</span>
+      </div>
+
+      <div class="section-grid">
+        <div>
+          <h2>
+            Let's weave<br>
+            <span class="highlight">something together.</span>
+          </h2>
+          <p class="contact-intro">
+            Whether you need strategic consulting, technical leadership, 
+            or hands-on development—I'd love to hear about your journey.
+          </p>
+        </div>
+
+        <div class="contact-links">
+          <a href="mailto:hello@pathwoven.com" class="contact-link">
+            <div class="contact-link-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <div class="contact-link-text">
+                <span>Email</span>
+                <p>hello@pathwoven.com</p>
+              </div>
+            </div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </a>
+
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <div class="contact-link-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+              <div class="contact-link-text">
+                <span>LinkedIn</span>
+                <p>Connect on LinkedIn</p>
+              </div>
+            </div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </a>
+
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <div class="contact-link-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                <path d="M9 18c-4.51 2-5-2-7-2"/>
+              </svg>
+              <div class="contact-link-text">
+                <span>GitHub</span>
+                <p>View my work</p>
+              </div>
+            </div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+              <path d="M2 17L12 22L22 17"/>
+              <path d="M2 12L12 17L22 12"/>
+            </svg>
+          </div>
+          <span>Pathwoven</span>
+        </div>
+
+        <div class="footer-right">
+          <p>Story, systems, and journey.</p>
+          <p>© 2025 Pathwoven</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
