@@ -1,46 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pathwoven | Human-Centered Tech Consulting & Systems Design</title>
-  <meta name="description" content="Pathwoven weaves clarity into complex systems. Human-centered technology consulting, wayfinding, and calm systems design with 15+ years of experience.">
-  <meta name="author" content="Pathwoven">
-  
-  <meta property="og:title" content="Pathwoven — Story, Systems, and Journey">
-  <meta property="og:description" content="Human-centered technology consulting. Weaving clarity into complex systems.">
-  <meta property="og:type" content="website">
-
+  <title>Pathwoven | Human-Centered Tech Consulting</title>
+  <meta name="description" content="Human-centered tech consulting that transforms complexity into calm, intuitive systems. 15+ years of wayfinding through complex technical landscapes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
   <style>
-    :root {
-      --background: hsl(40 30% 96%);
-      --foreground: hsl(160 25% 15%);
-      --card: hsl(40 25% 94%);
-      --card-foreground: hsl(160 25% 15%);
-      --primary: hsl(158 35% 25%);
-      --primary-foreground: hsl(40 30% 96%);
-      --secondary: hsl(40 20% 90%);
-      --secondary-foreground: hsl(160 25% 20%);
-      --muted: hsl(40 15% 88%);
-      --muted-foreground: hsl(160 10% 45%);
-      --accent: hsl(18 60% 55%);
-      --accent-foreground: hsl(40 30% 96%);
-      --border: hsl(40 15% 85%);
-      --radius: 0.75rem;
-      --font-display: 'Lora', serif;
-      --font-body: 'DM Sans', sans-serif;
-      --gradient-warm: linear-gradient(135deg, hsla(18, 60%, 55%, 0.1) 0%, hsla(40, 30%, 96%, 0) 60%);
-      --shadow-card: 0 2px 12px hsla(160, 25%, 15%, 0.04);
-    }
-
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    :root {
+      --background: hsl(0 0% 96%);
+      --foreground: hsl(0 0% 9%);
+      --card: hsl(0 0% 98%);
+      --card-foreground: hsl(0 0% 9%);
+      --primary: hsl(161 93% 30%);
+      --primary-foreground: hsl(151 80% 95%);
+      --muted-foreground: hsl(0 0% 40%);
+      --border: hsl(0 0% 83%);
+      --accent: hsl(18 70% 50%);
+      --highlight: hsl(45 90% 60%);
+      --gradient-warm: linear-gradient(135deg, hsl(18 70% 50% / 0.15) 0%, hsl(45 90% 60% / 0.08) 50%, hsl(40 30% 96% / 0) 80%);
+      --shadow-glow: 0 0 30px hsl(18 70% 50% / 0.15);
+      --font-display: 'Lora', serif;
+      --font-body: 'DM Sans', sans-serif;
     }
 
     html {
@@ -53,13 +43,11 @@
       color: var(--foreground);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-display);
       font-weight: 400;
-      line-height: 1.2;
     }
 
     a {
@@ -83,20 +71,20 @@
       overflow: hidden;
     }
 
-    .hero-glow {
+    .hero-gradient {
       position: absolute;
       top: 0;
       right: 0;
       width: 800px;
       height: 800px;
       border-radius: 50%;
-      background: var(--gradient-warm);
       opacity: 0.6;
-      filter: blur(60px);
+      filter: blur(48px);
       pointer-events: none;
+      background: var(--gradient-warm);
     }
 
-    .hero-path {
+    .hero-paths {
       position: absolute;
       right: 0;
       top: 25%;
@@ -106,106 +94,93 @@
       pointer-events: none;
     }
 
-    .hero-path path {
-      stroke-dasharray: 200;
-      stroke-dashoffset: 200;
-      animation: drawPath 1.5s ease-out forwards;
-    }
-
-    .hero-path path:nth-child(2) {
-      animation-delay: 0.1s;
-    }
-
     .hero-content {
       position: relative;
       z-index: 1;
       padding: 5rem 0;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
+    .hero-content > * {
       opacity: 0;
       animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    .brand-icon {
+    .hero-content > *:nth-child(1) { animation-delay: 0s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.1s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.2s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.3s; }
+    .hero-content > *:nth-child(5) { animation-delay: 0.4s; }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .logo-icon {
       width: 2rem;
       height: 2rem;
       border-radius: 50%;
-      background: var(--primary);
+      background-color: var(--primary);
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .brand-icon svg {
-      width: 1rem;
-      height: 1rem;
+    .logo-icon svg {
       color: var(--primary-foreground);
     }
 
-    .brand-name {
+    .logo-text {
       font-family: var(--font-display);
       font-size: 1.125rem;
-      letter-spacing: 0.025em;
+      letter-spacing: 0.05em;
     }
 
     .hero h1 {
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       line-height: 1.15;
       margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      animation-delay: 0.1s;
     }
 
-    .hero h1 .highlight {
+    .hero h1 .text-primary {
       color: var(--primary);
     }
 
-    .hero-tagline {
-      font-size: 1.125rem;
+    .hero .tagline {
+      font-size: 1.25rem;
       color: var(--muted-foreground);
       max-width: 36rem;
       line-height: 1.7;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      animation-delay: 0.2s;
+      margin-bottom: 2rem;
     }
 
-    .hero-divider {
+    .hero .divider {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      animation-delay: 0.3s;
+      padding-top: 1rem;
+      margin-bottom: 2rem;
     }
 
-    .hero-divider span {
-      height: 1px;
+    .hero .divider-line {
       width: 3rem;
-      background: var(--border);
+      height: 1px;
+      background-color: var(--border);
     }
 
-    .hero-divider p {
+    .hero .divider-text {
       font-size: 0.875rem;
       color: var(--muted-foreground);
-      letter-spacing: 0.025em;
+      letter-spacing: 0.05em;
     }
 
-    .hero-cta {
+    .hero .cta-group {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      animation-delay: 0.4s;
+      padding-top: 1rem;
     }
 
     .btn-primary {
@@ -213,31 +188,43 @@
       align-items: center;
       justify-content: center;
       padding: 0.875rem 1.75rem;
-      background: var(--primary);
+      background-color: var(--primary);
       color: var(--primary-foreground);
       font-weight: 500;
       border-radius: 9999px;
-      transition: opacity 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-glow);
     }
 
     .btn-primary:hover {
-      opacity: 0.9;
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px hsl(161 93% 30% / 0.3);
     }
 
-    .btn-text {
+    .btn-primary .arrow {
+      margin-left: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-primary:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    .btn-secondary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       padding: 0.875rem 1.75rem;
+      color: var(--foreground);
       font-weight: 500;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
-    .btn-text:hover {
+    .btn-secondary:hover {
       color: var(--primary);
     }
 
-    /* Sections */
+    /* Section styles */
     section {
       padding: 6rem 0;
     }
@@ -249,93 +236,59 @@
       margin-bottom: 3rem;
     }
 
-    .section-label span:first-child {
+    .section-label-line {
       width: 2rem;
       height: 1px;
-      background: var(--primary);
+      background-color: var(--primary);
     }
 
-    .section-label span:last-child {
-      font-size: 0.75rem;
+    .section-label-text {
+      font-size: 0.875rem;
       color: var(--muted-foreground);
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
     }
 
-    .section-grid {
-      display: grid;
-      gap: 3rem;
+    /* Approach Section */
+    .approach {
+      background-color: var(--card);
     }
 
-    @media (min-width: 768px) {
-      .section-grid {
-        grid-template-columns: 2fr 3fr;
-        gap: 4rem;
-      }
-    }
-
-    section h2 {
+    .approach h2 {
       font-size: clamp(1.875rem, 4vw, 2.5rem);
+      margin-bottom: 4rem;
       line-height: 1.3;
     }
 
-    section h2 .highlight {
+    .approach h2 .text-primary {
       color: var(--primary);
     }
 
-    .section-text {
-      color: var(--muted-foreground);
-      line-height: 1.8;
-    }
-
-    .section-text p + p {
-      margin-top: 1.5rem;
-    }
-
-    .section-text p:first-child {
-      font-size: 1.125rem;
-    }
-
-    /* Card Section */
-    .bg-card {
-      background: var(--card);
-    }
-
-    /* Approach Grid */
-    .approach-grid {
+    .pillars-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-    }
-
-    @media (min-width: 640px) {
-      .approach-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 3rem;
-      }
     }
 
     .pillar {
       display: flex;
-      align-items: flex-start;
       gap: 1rem;
+      padding: 1rem;
+      margin: -1rem;
+      border-radius: 0.75rem;
     }
 
     .pillar-icon {
-      padding: 0.625rem;
-      border-radius: 0.5rem;
-      background: var(--background);
-      color: var(--primary);
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--background);
       border: 1px solid var(--border);
-      transition: border-color 0.3s;
-    }
-
-    .pillar:hover .pillar-icon {
-      border-color: hsla(158, 35%, 25%, 0.3);
-    }
-
-    .pillar-icon svg {
-      width: 1.25rem;
-      height: 1.25rem;
+      border-radius: 0.5rem;
+      color: var(--primary);
     }
 
     .pillar-content h3 {
@@ -349,107 +302,103 @@
       line-height: 1.7;
     }
 
-    /* Toolkit */
-    .capability {
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border);
-      transition: border-color 0.3s;
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 4rem;
     }
 
-    .capability:hover {
-      border-color: hsla(158, 35%, 25%, 0.3);
-    }
-
-    .capability + .capability {
-      margin-top: 1.5rem;
-    }
-
-    .capability-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    @media (min-width: 640px) {
-      .capability-inner {
-        flex-direction: row;
-        align-items: baseline;
-        gap: 1rem;
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
     }
 
-    .capability-label {
-      font-family: var(--font-display);
-      font-size: 1.125rem;
+    .about h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      line-height: 1.3;
     }
 
-    .capability-tools {
+    .about h2 .text-primary {
+      color: var(--primary);
+    }
+
+    .about-content p {
+      color: var(--muted-foreground);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content p:first-child {
+      font-size: 1.125rem;
+      color: var(--foreground);
+    }
+
+    /* Contact Section */
+    .contact {
+      background-color: var(--card);
+    }
+
+    .contact h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      line-height: 1.3;
+    }
+
+    .contact-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem 1.5rem;
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      font-weight: 500;
+      border-radius: 9999px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-glow);
+      width: fit-content;
+    }
+
+    .contact-primary:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px hsl(161 93% 30% / 0.3);
+    }
+
+    .contact-primary .arrow {
+      margin-left: 0.25rem;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-primary:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    .contact-secondary {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 0.5rem;
+    }
+
+    .contact-secondary span {
       font-size: 0.875rem;
       color: var(--muted-foreground);
     }
 
-    /* Contact */
-    .contact-intro {
-      margin-top: 1.5rem;
+    .contact-secondary a {
       color: var(--muted-foreground);
-      line-height: 1.7;
+      transition: color 0.3s ease;
     }
 
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem;
-      border-radius: 0.75rem;
-      background: var(--background);
-      border: 1px solid var(--border);
-      transition: border-color 0.3s;
-    }
-
-    .contact-link:hover {
-      border-color: hsla(158, 35%, 25%, 0.3);
-    }
-
-    .contact-link-inner {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .contact-link svg:first-child {
-      width: 1.25rem;
-      height: 1.25rem;
+    .contact-secondary a:hover {
       color: var(--primary);
-    }
-
-    .contact-link-text span {
-      display: block;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--muted-foreground);
-    }
-
-    .contact-link-text p {
-      margin-top: 0.125rem;
-    }
-
-    .contact-link .arrow {
-      width: 1rem;
-      height: 1rem;
-      color: var(--muted-foreground);
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    .contact-link:hover .arrow {
-      color: var(--primary);
-      transform: translate(2px, -2px);
     }
 
     /* Footer */
@@ -458,65 +407,28 @@
       border-top: 1px solid var(--border);
     }
 
-    .footer-inner {
+    .footer-content {
       display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .footer-inner {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .footer-brand {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-    }
-
-    .footer-brand-icon {
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 50%;
-      background: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .footer-brand-icon svg {
-      width: 0.75rem;
-      height: 0.75rem;
-      color: var(--primary-foreground);
-    }
-
-    .footer-brand span {
+      gap: 0.5rem;
       font-family: var(--font-display);
-      font-size: 0.875rem;
     }
 
-    .footer-right {
-      text-align: left;
+    .footer-brand svg {
+      color: var(--primary);
     }
 
-    @media (min-width: 768px) {
-      .footer-right {
-        text-align: right;
-      }
-    }
-
-    .footer-right p {
+    .footer-copy {
       font-size: 0.875rem;
       color: var(--muted-foreground);
-    }
-
-    .footer-right p + p {
-      margin-top: 0.25rem;
-      font-size: 0.75rem;
     }
 
     /* Animations */
@@ -539,133 +451,124 @@
         stroke-dashoffset: 0;
       }
     }
+
+    .animate-draw {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: drawPath 1.5s ease-out forwards;
+    }
+
+    .delay-500 {
+      animation-delay: 0.5s;
+    }
+
+    .delay-600 {
+      animation-delay: 0.6s;
+    }
   </style>
 </head>
 <body>
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-glow"></div>
-    <svg class="hero-path" viewBox="0 0 100 200" fill="none">
-      <path d="M80 0 C 60 50, 90 80, 50 100 C 10 120, 70 150, 40 200" stroke="hsl(158 35% 25%)" stroke-width="1"/>
-      <path d="M90 20 C 70 70, 100 100, 60 120 C 20 140, 80 170, 50 200" stroke="hsl(18 60% 55%)" stroke-width="0.5"/>
+    <div class="hero-gradient"></div>
+    <svg class="hero-paths" viewBox="0 0 100 200" fill="none">
+      <path 
+        d="M80 0 C 60 50, 90 80, 50 100 C 10 120, 70 150, 40 200" 
+        stroke="hsl(161 93% 30%)" 
+        stroke-width="1"
+        class="animate-draw delay-500"
+      />
+      <path 
+        d="M90 20 C 70 70, 100 100, 60 120 C 20 140, 80 170, 50 200" 
+        stroke="hsl(18 70% 50%)" 
+        stroke-width="0.5"
+        class="animate-draw delay-600"
+      />
     </svg>
-
     <div class="container hero-content">
-      <div class="brand">
-        <div class="brand-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
             <path d="M2 17L12 22L22 17"/>
             <path d="M2 12L12 17L22 12"/>
           </svg>
         </div>
-        <span class="brand-name">Pathwoven</span>
+        <span class="logo-text">Pathwoven</span>
       </div>
-
+      
       <h1>
         Weaving clarity<br>
         into complex<br>
-        <span class="highlight">systems.</span>
+        <span class="text-primary">systems.</span>
       </h1>
-
-      <p class="hero-tagline">
-        Human-centered technology consulting. I help teams design calm, 
-        intuitive systems that guide users and scale with purpose.
+      
+      <p class="tagline">
+        Human-centered tech consulting that transforms complexity into 
+        calm, intuitive systems. From federal platforms to startup MVPs—creating 
+        paths that feel natural to follow.
       </p>
-
-      <div class="hero-divider">
-        <span></span>
-        <p>15+ years of wayfinding</p>
+      
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">15+ years of wayfinding</span>
       </div>
-
-      <div class="hero-cta">
-        <a href="#contact" class="btn-primary">Start a Conversation</a>
-        <a href="#approach" class="btn-text">How I Work →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about">
-    <div class="container">
-      <div class="section-label">
-        <span></span>
-        <span>The Thread</span>
-      </div>
-
-      <div class="section-grid">
-        <div>
-          <h2>
-            Story, systems,<br>
-            <span class="highlight">& journey.</span>
-          </h2>
-        </div>
-
-        <div class="section-text">
-          <p>
-            I'm a senior developer and consultant with 15+ years bridging the gap 
-            between hands-on coding and strategic leadership. I don't just build — 
-            I weave outcomes.
-          </p>
-          <p>
-            From leading frontend strategy and coordinating cross-functional teams 
-            to designing federal reporting systems for USDA/FNS, my work centers 
-            on creating paths that feel natural to follow.
-          </p>
-          <p>
-            What sets Pathwoven apart: technical depth paired with genuine people 
-            skills. I mentor developers, translate complex requirements into clear 
-            solutions, and design systems that breathe.
-          </p>
-        </div>
+      
+      <div class="cta-group">
+        <a href="#contact" class="btn-primary">
+          Start a Conversation
+          <span class="arrow">→</span>
+        </a>
+        <a href="#approach" class="btn-secondary">
+          How I Work →
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Approach -->
-  <section id="approach" class="bg-card">
+  <!-- Approach Section -->
+  <section id="approach" class="approach">
     <div class="container">
       <div class="section-label">
-        <span></span>
-        <span>The Approach</span>
+        <div class="section-label-line"></div>
+        <span class="section-label-text">The Approach</span>
       </div>
-
-      <h2 style="margin-bottom: 4rem;">
+      
+      <h2>
         Four threads that<br>
-        <span class="highlight">guide every project.</span>
+        <span class="text-primary">guide every project.</span>
       </h2>
-
-      <div class="approach-grid">
+      
+      <div class="pillars-grid">
         <div class="pillar">
           <div class="pillar-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/>
-              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+              <path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/>
             </svg>
           </div>
           <div class="pillar-content">
             <h3>Wayfinding</h3>
-            <p>Designing intuitive paths through complex systems. Every interaction should feel like following a well-marked trail.</p>
+            <p>Creating intuitive paths through complex systems. Users should always know where they are, where they can go, and how to get back.</p>
           </div>
         </div>
-
+        
         <div class="pillar">
           <div class="pillar-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-              <polyline points="2 17 12 22 22 17"/>
-              <polyline points="2 12 12 17 22 12"/>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="6" rx="1"/>
+              <rect x="4" y="14" width="16" height="6" rx="1"/>
             </svg>
           </div>
           <div class="pillar-content">
             <h3>Systems Thinking</h3>
-            <p>Understanding how pieces connect. I architect solutions that scale gracefully and adapt to change.</p>
+            <p>Building architecture that scales gracefully. Understanding how parts connect to create resilient, adaptable wholes.</p>
           </div>
         </div>
-
+        
         <div class="pillar">
           <div class="pillar-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
               <circle cx="9" cy="7" r="4"/>
               <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
@@ -674,145 +577,99 @@
           </div>
           <div class="pillar-content">
             <h3>Human-Centered</h3>
-            <p>Technology serves people, not the other way around. I prioritize clarity, calm, and genuine utility.</p>
+            <p>Technology should serve people, not the other way around. Every decision filtered through the lens of user experience.</p>
           </div>
         </div>
-
+        
         <div class="pillar">
           <div class="pillar-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-              <path d="M19 3v4"/>
-              <path d="M21 5h-4"/>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+              <path d="M5 17l.5 1.5L7 19l-1.5.5L5 21l-.5-1.5L3 19l1.5-.5L5 17z"/>
+              <path d="M19 17l.5 1.5L21 19l-1.5.5L19 21l-.5-1.5L17 19l1.5-.5L19 17z"/>
             </svg>
           </div>
           <div class="pillar-content">
             <h3>Calm Systems</h3>
-            <p>Reducing noise, eliminating friction. Building products that feel restful to use, not exhausting.</p>
+            <p>Inspired by calm technology principles—systems that inform without demanding, that are restful to use rather than exhausting.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Toolkit -->
-  <section id="toolkit">
+  <!-- About Section -->
+  <section id="about" class="about">
     <div class="container">
       <div class="section-label">
-        <span></span>
-        <span>The Craft</span>
+        <div class="section-label-line"></div>
+        <span class="section-label-text">The Thread</span>
       </div>
-
-      <div class="section-grid">
+      
+      <div class="about-grid">
         <div>
           <h2>
-            Tools refined<br>
-            <span class="highlight">over 15+ years.</span>
+            Story, systems,<br>
+            <span class="text-primary">& journey.</span>
           </h2>
         </div>
-
-        <div>
-          <div class="capability">
-            <div class="capability-inner">
-              <span class="capability-label">Frontend Architecture</span>
-              <span class="capability-tools">Vue.js, React, TypeScript</span>
-            </div>
-          </div>
-          <div class="capability">
-            <div class="capability-inner">
-              <span class="capability-label">Backend Systems</span>
-              <span class="capability-tools">Laravel, Ruby on Rails, Node.js</span>
-            </div>
-          </div>
-          <div class="capability">
-            <div class="capability-inner">
-              <span class="capability-label">Data & Infrastructure</span>
-              <span class="capability-tools">PostgreSQL, MySQL, AWS, Docker</span>
-            </div>
-          </div>
-          <div class="capability">
-            <div class="capability-inner">
-              <span class="capability-label">Process & Delivery</span>
-              <span class="capability-tools">Agile, Team Leadership, Technical Strategy</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="bg-card">
-    <div class="container">
-      <div class="section-label">
-        <span></span>
-        <span>The Path Forward</span>
-      </div>
-
-      <div class="section-grid">
-        <div>
-          <h2>
-            Let's weave<br>
-            <span class="highlight">something together.</span>
-          </h2>
-          <p class="contact-intro">
-            Whether you need strategic consulting, technical leadership, 
-            or hands-on development—I'd love to hear about your journey.
+        
+        <div class="about-content">
+          <p>
+            15+ years of bridging the gap between hands-on coding and strategic 
+            leadership. From frontend architecture to federal systems (USDA/FNS), 
+            I've learned that the best solutions come from understanding both the 
+            technical landscape and the humans navigating it.
+          </p>
+          <p>
+            I believe in creating paths that feel natural to follow—whether that's 
+            a user interface, a team workflow, or a system architecture. Technical 
+            depth paired with genuine curiosity about people.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="contact-links">
-          <a href="mailto:hello@pathwoven.com" class="contact-link">
-            <div class="contact-link-inner">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="4" width="20" height="16" rx="2"/>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-              </svg>
-              <div class="contact-link-text">
-                <span>Email</span>
-                <p>hello@pathwoven.com</p>
-              </div>
-            </div>
-            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="7" y1="17" x2="17" y2="7"/>
-              <polyline points="7 7 17 7 17 17"/>
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">The Path Forward</span>
+      </div>
+      
+      <div class="about-grid">
+        <div>
+          <h2>Let's connect.</h2>
+        </div>
+        
+        <div class="contact-options">
+          <a href="mailto:hello@pathwoven.com" class="contact-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
+            Get in Touch
+            <span class="arrow">→</span>
           </a>
-
-          <a href="https://www.linkedin.com/in/joshua-weaver-7605762a1/" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <div class="contact-link-inner">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          
+          <div class="contact-secondary">
+            <span>Also find me on</span>
+            <a href="https://www.linkedin.com/in/joshua-weaver-7605762a1/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                <rect x="2" y="9" width="4" height="12"/>
+                <rect width="4" height="12" x="2" y="9"/>
                 <circle cx="4" cy="4" r="2"/>
               </svg>
-              <div class="contact-link-text">
-                <span>LinkedIn</span>
-                <p>Connect on LinkedIn</p>
-              </div>
-            </div>
-            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="7" y1="17" x2="17" y2="7"/>
-              <polyline points="7 7 17 7 17 17"/>
-            </svg>
-          </a>
-
-          <a href="https://github.com/josh7weaver" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <div class="contact-link-inner">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            </a>
+            <a href="https://github.com/josh7weaver" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
                 <path d="M9 18c-4.51 2-5-2-7-2"/>
               </svg>
-              <div class="contact-link-text">
-                <span>GitHub</span>
-                <p>View my work</p>
-              </div>
-            </div>
-            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="7" y1="17" x2="17" y2="7"/>
-              <polyline points="7 7 17 7 17 17"/>
-            </svg>
-          </a>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -821,22 +678,16 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <div class="footer-inner">
+      <div class="footer-content">
         <div class="footer-brand">
-          <div class="footer-brand-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-              <path d="M2 17L12 22L22 17"/>
-              <path d="M2 12L12 17L22 12"/>
-            </svg>
-          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+            <path d="M2 17L12 22L22 17"/>
+            <path d="M2 12L12 17L22 12"/>
+          </svg>
           <span>Pathwoven</span>
         </div>
-
-        <div class="footer-right">
-          <p>Story, systems, and journey.</p>
-          <p>© 2025 Pathwoven</p>
-        </div>
+        <span class="footer-copy">Clarity through complexity.</span>
       </div>
     </div>
   </footer>
