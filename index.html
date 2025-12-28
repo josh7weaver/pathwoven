@@ -431,6 +431,18 @@
       color: var(--muted-foreground);
     }
 
+    @media (max-width: 768px) {
+      .hero {
+        min-height: auto;          /* don’t force full viewport */
+        justify-content: flex-start;
+      }
+    
+      .hero-content {
+        padding-top: 2rem;        /* instead of 5rem */
+        padding-bottom: 3rem;
+      }
+    }
+
     /* Animations */
     @keyframes fadeUp {
       from {
