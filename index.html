@@ -1,14 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pathwoven | Human-Centered Tech Consulting</title>
-  <meta name="description" content="Human-centered tech consulting that transforms complexity into calm, intuitive systems. 15+ years of wayfinding through complex technical landscapes.">
+  <title>Pathwoven | AI Dev Tooling & DevOps Consulting</title>
+  <meta name="description" content="Pathwoven helps engineering teams integrate AI dev tooling and modernize DevOps workflows — calmly, securely, and in ways teams can actually live with.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -61,7 +64,76 @@
       padding: 0 1.5rem;
     }
 
-    /* Hero Section */
+    /* ---- NAV ---- */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 0;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .site-nav.scrolled {
+      background: hsl(0 0% 96% / 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-inner {
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background-color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      color: var(--primary-foreground);
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      letter-spacing: 0.03em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* ---- HERO ---- */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -100,48 +172,21 @@
       padding: 5rem 0;
     }
 
-    .hero-content > * {
+    .hero-content > .container > * {
       opacity: 0;
       animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    .hero-content > *:nth-child(1) { animation-delay: 0s; }
-    .hero-content > *:nth-child(2) { animation-delay: 0.1s; }
-    .hero-content > *:nth-child(3) { animation-delay: 0.2s; }
-    .hero-content > *:nth-child(4) { animation-delay: 0.3s; }
-    .hero-content > *:nth-child(5) { animation-delay: 0.4s; }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-    }
-
-    .logo-icon {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      background-color: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-icon svg {
-      color: var(--primary-foreground);
-    }
-
-    .logo-text {
-      font-family: var(--font-display);
-      font-size: 1.125rem;
-      letter-spacing: 0.05em;
-    }
+    .hero-content > .container > *:nth-child(1) { animation-delay: 0s; }
+    .hero-content > .container > *:nth-child(2) { animation-delay: 0.1s; }
+    .hero-content > .container > *:nth-child(3) { animation-delay: 0.2s; }
+    .hero-content > .container > *:nth-child(4) { animation-delay: 0.3s; }
+    .hero-content > .container > *:nth-child(5) { animation-delay: 0.4s; }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-size: clamp(2.5rem, 7vw, 4rem);
       line-height: 1.15;
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
     }
 
     .hero h1 .text-primary {
@@ -151,16 +196,16 @@
     .hero .tagline {
       font-size: 1.25rem;
       color: var(--muted-foreground);
-      max-width: 36rem;
+      max-width: 38rem;
       line-height: 1.7;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .hero .divider {
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding-top: 1rem;
+      padding-top: 0.5rem;
       margin-bottom: 2rem;
     }
 
@@ -174,6 +219,8 @@
       font-size: 0.875rem;
       color: var(--muted-foreground);
       letter-spacing: 0.05em;
+      font-style: italic;
+      font-family: var(--font-display);
     }
 
     .hero .cta-group {
@@ -224,7 +271,7 @@
       color: var(--primary);
     }
 
-    /* Section styles */
+    /* ---- SECTIONS (shared) ---- */
     section {
       padding: 6rem 0;
     }
@@ -249,71 +296,75 @@
       text-transform: uppercase;
     }
 
-    /* Approach Section */
-    .approach {
+    /* ---- SERVICES ---- */
+    .services {
       background-color: var(--card);
     }
 
-    .approach h2 {
+    .services h2 {
       font-size: clamp(1.875rem, 4vw, 2.5rem);
-      margin-bottom: 4rem;
+      margin-bottom: 1.25rem;
       line-height: 1.3;
     }
 
-    .approach h2 .text-primary {
+    .services h2 .text-primary {
       color: var(--primary);
     }
 
-    .pillars-grid {
+    .services-intro {
+      color: var(--muted-foreground);
+      font-size: 1.05rem;
+      max-width: 38rem;
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+    }
+
+    .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
     }
 
-    .pillar {
-      display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      margin: -1rem;
-      border-radius: 0.75rem;
+    .service-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--background);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
-    .pillar-icon {
-      flex-shrink: 0;
+    .service-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 8px 30px hsl(161 93% 30% / 0.08);
+    }
+
+    .service-card .service-icon {
       width: 2.5rem;
       height: 2.5rem;
+      border-radius: 8px;
+      background: hsl(161 93% 30% / 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--background);
-      border: 1px solid var(--border);
-      border-radius: 0.5rem;
+      margin-bottom: 1.25rem;
       color: var(--primary);
     }
 
-    .pillar-content h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
+    .service-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
     }
 
-    .pillar-content p {
-      font-size: 0.875rem;
+    .service-card p {
+      font-size: 0.925rem;
       color: var(--muted-foreground);
-      line-height: 1.7;
+      line-height: 1.65;
     }
 
-    /* About Section */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 2fr 3fr;
-      gap: 4rem;
-    }
-
-    @media (max-width: 768px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+    /* ---- ABOUT ---- */
+    .about {
+      padding: 6rem 0;
     }
 
     .about h2 {
@@ -325,38 +376,165 @@
       color: var(--primary);
     }
 
-    .about-content p {
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-photo {
+      aspect-ratio: 3 / 4;
+      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .about-photo-placeholder {
+      font-size: 0.8rem;
       color: var(--muted-foreground);
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
+      text-align: center;
+      padding: 1.5rem;
+      line-height: 1.5;
     }
 
-    .about-content p:first-child {
-      font-size: 1.125rem;
+    .about-text h2 {
+      margin-bottom: 1.75rem;
+    }
+
+    .about-text p {
+      font-size: 1.025rem;
+      color: var(--muted-foreground);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-text p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .about-text .focus-areas {
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.95rem;
       color: var(--foreground);
+      line-height: 1.7;
     }
 
-    /* Contact Section */
-    .contact {
+    .about-text .focus-areas strong {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    /* ---- WRITING ---- */
+    .writing {
       background-color: var(--card);
+    }
+
+    .writing h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      margin-bottom: 1.25rem;
+      line-height: 1.3;
+    }
+
+    .writing h2 .text-primary {
+      color: var(--primary);
+    }
+
+    .writing-intro {
+      color: var(--muted-foreground);
+      font-size: 1.05rem;
+      max-width: 38rem;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    .articles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .article-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--background);
+      transition: border-color 0.3s ease;
+    }
+
+    .article-card:hover {
+      border-color: var(--primary);
+    }
+
+    .article-card .article-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-card p {
+      font-size: 0.925rem;
+      color: var(--muted-foreground);
+      line-height: 1.65;
+    }
+
+    /* ---- CONTACT ---- */
+    .contact {
+      padding: 6rem 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
     }
 
     .contact h2 {
       font-size: clamp(1.875rem, 4vw, 2.5rem);
       line-height: 1.3;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-text {
+      font-size: 1.025rem;
+      color: var(--muted-foreground);
+      line-height: 1.75;
     }
 
     .contact-options {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.25rem;
     }
 
     .contact-primary {
       display: inline-flex;
       align-items: center;
       gap: 0.75rem;
-      padding: 0.875rem 1.5rem;
+      padding: 1rem 1.75rem;
       background-color: var(--primary);
       color: var(--primary-foreground);
       font-weight: 500;
@@ -372,12 +550,24 @@
     }
 
     .contact-primary .arrow {
-      margin-left: 0.25rem;
       transition: transform 0.3s ease;
     }
 
     .contact-primary:hover .arrow {
       transform: translateX(4px);
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--muted-foreground);
+      transition: color 0.2s ease;
+    }
+
+    .contact-email:hover {
+      color: var(--primary);
     }
 
     .contact-secondary {
@@ -388,31 +578,29 @@
     }
 
     .contact-secondary span {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: var(--muted-foreground);
     }
 
     .contact-secondary a {
       color: var(--muted-foreground);
-      transition: color 0.3s ease;
+      transition: color 0.2s ease;
     }
 
     .contact-secondary a:hover {
       color: var(--primary);
     }
 
-    /* Footer */
+    /* ---- FOOTER ---- */
     footer {
-      padding: 3rem 0;
       border-top: 1px solid var(--border);
+      padding: 2rem 0;
     }
 
     .footer-content {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      justify-content: space-between;
     }
 
     .footer-brand {
@@ -420,31 +608,63 @@
       align-items: center;
       gap: 0.5rem;
       font-family: var(--font-display);
-    }
-
-    .footer-brand svg {
-      color: var(--primary);
-    }
-
-    .footer-copy {
       font-size: 0.875rem;
       color: var(--muted-foreground);
     }
 
+    .footer-tagline {
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      font-style: italic;
+      font-family: var(--font-display);
+      letter-spacing: 0.02em;
+    }
+
+    /* ---- RESPONSIVE ---- */
     @media (max-width: 768px) {
-      .hero {
-        min-height: auto;          /* don’t force full viewport */
-        justify-content: flex-start;
-        padding-top: 3rem;
+      .nav-links {
+        display: none;
       }
-    
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .about-photo {
+        max-width: 280px;
+        aspect-ratio: 1;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
+
       .hero-content {
-        padding-top: 0;        /* instead of 5rem */
-        padding-bottom: 3rem;
+        padding: 6rem 0 3rem;
+      }
+
+      section {
+        padding: 4rem 0;
       }
     }
 
-    /* Animations */
+    /* ---- ANIMATIONS ---- */
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -457,12 +677,8 @@
     }
 
     @keyframes drawPath {
-      from {
-        stroke-dashoffset: 200;
-      }
-      to {
-        stroke-dashoffset: 0;
-      }
+      from { stroke-dashoffset: 200; }
+      to { stroke-dashoffset: 0; }
     }
 
     .animate-draw {
@@ -471,17 +687,46 @@
       animation: drawPath 1.5s ease-out forwards;
     }
 
-    .delay-500 {
-      animation-delay: 0.5s;
+    .delay-500 { animation-delay: 0.5s; }
+    .delay-600 { animation-delay: 0.6s; }
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .delay-600 {
-      animation-delay: 0.6s;
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
+
+  <!-- Nav -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+            <path d="M2 17L12 22L22 17"/>
+            <path d="M2 12L12 17L22 12"/>
+          </svg>
+        </div>
+        <span class="logo-text">Pathwoven</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-gradient"></div>
     <svg class="hero-paths" viewBox="0 0 100 200" fill="none">
@@ -500,173 +745,241 @@
     </svg>
     <div class="hero-content">
       <div class="container">
-        <div class="logo">
-          <div class="logo-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-              <path d="M2 17L12 22L22 17"/>
-              <path d="M2 12L12 17L22 12"/>
-            </svg>
-          </div>
-          <span class="logo-text">Pathwoven</span>
-        </div>
-        
+        <div style="height: 1rem;"></div>
+
         <h1>
-          Weaving clarity<br>
-          into complex<br>
-          <span class="text-primary">systems.</span>
+          AI dev tooling &amp;<br>
+          DevOps that<br>
+          <span class="text-primary">teams can live in.</span>
         </h1>
         
         <p class="tagline">
-          Human-centered tech consulting that transforms complexity into 
-          calm, intuitive systems. From federal platforms to startup MVPs—creating 
-          paths that feel natural to follow.
+          Pathwoven helps engineering teams adopt AI coding agents and 
+          modernize DevOps workflows — calmly, securely, and without 
+          breaking what already works.
         </p>
         
         <div class="divider">
           <div class="divider-line"></div>
-          <span class="divider-text">15+ years of wayfinding</span>
+          <span class="divider-text">Tools in service of humans</span>
         </div>
         
         <div class="cta-group">
           <a href="#contact" class="btn-primary">
-            Start a Conversation
+            Book a Free Consultation
             <span class="arrow">→</span>
           </a>
-          <a href="#approach" class="btn-secondary">
-            How I Work →
+          <a href="#services" class="btn-secondary">
+            See How I Work →
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Approach Section -->
-  <section id="approach" class="approach">
-    <div class="container">
+  <!-- Services -->
+  <section id="services" class="services">
+    <div class="container fade-section">
       <div class="section-label">
         <div class="section-label-line"></div>
-        <span class="section-label-text">The Approach</span>
+        <span class="section-label-text">Services</span>
       </div>
       
       <h2>
-        Four threads that<br>
-        <span class="text-primary">guide every project.</span>
+        What I help<br>
+        <span class="text-primary">teams solve.</span>
       </h2>
+
+      <p class="services-intro">
+        I work with engineering teams navigating the messy middle — where AI tooling 
+        meets real codebases, where compliance matters, and where the goal isn't 
+        transformation theater but systems people can actually sustain.
+      </p>
       
-      <div class="pillars-grid">
-        <div class="pillar">
-          <div class="pillar-icon">
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/>
+              <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+              <path d="M5 17l.5 1.5L7 19l-1.5.5L5 21l-.5-1.5L3 19l1.5-.5L5 17z"/>
             </svg>
           </div>
-          <div class="pillar-content">
-            <h3>Wayfinding</h3>
-            <p>Creating intuitive paths through complex systems. Users should always know where they are, where they can go, and how to get back.</p>
-          </div>
+          <h3>AI Dev Workflow Integration</h3>
+          <p>Adopt AI coding agents (Claude Code, Codex CLI, Copilot) into your existing 
+            codebase without alarming compliance. Context engineering, codebase configuration, 
+            and workflows your team can sustain.</p>
         </div>
         
-        <div class="pillar">
-          <div class="pillar-icon">
+        <div class="service-card">
+          <div class="service-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="4" y="4" width="16" height="6" rx="1"/>
               <rect x="4" y="14" width="16" height="6" rx="1"/>
             </svg>
           </div>
-          <div class="pillar-content">
-            <h3>Systems Thinking</h3>
-            <p>Building architecture that scales gracefully. Understanding how parts connect to create resilient, adaptable wholes.</p>
-          </div>
+          <h3>DevOps Modernization</h3>
+          <p>CI/CD pipeline architecture, multi-repo automation, branch hygiene, 
+            and deployment design. Clean systems that reduce friction and don't require 
+            constant maintenance.</p>
         </div>
         
-        <div class="pillar">
-          <div class="pillar-icon">
+        <div class="service-card">
+          <div class="service-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
             </svg>
           </div>
-          <div class="pillar-content">
-            <h3>Human-Centered</h3>
-            <p>Technology should serve people, not the other way around. Every decision filtered through the lens of user experience.</p>
-          </div>
+          <h3>Process &amp; Architecture Design</h3>
+          <p>PR workflows, test automation strategy, context documentation, 
+            and engineering process design — especially for teams with compliance 
+            obligations and real legacy to manage.</p>
         </div>
-        
-        <div class="pillar">
-          <div class="pillar-icon">
+
+        <div class="service-card">
+          <div class="service-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
-              <path d="M5 17l.5 1.5L7 19l-1.5.5L5 21l-.5-1.5L3 19l1.5-.5L5 17z"/>
-              <path d="M19 17l.5 1.5L21 19l-1.5.5L19 21l-.5-1.5L17 19l1.5-.5L19 17z"/>
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
             </svg>
           </div>
-          <div class="pillar-content">
-            <h3>Calm Systems</h3>
-            <p>Inspired by calm technology principles—systems that inform without demanding, that are restful to use rather than exhausting.</p>
-          </div>
+          <h3>Hands-On Engineering</h3>
+          <p>Senior-level C# / .NET, JavaScript, and Python. I write the code, not 
+            just the strategy. Test automation, frontend architecture, performance 
+            optimization, and the unglamorous work that makes systems reliable.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- About -->
   <section id="about" class="about">
-    <div class="container">
+    <div class="container fade-section">
       <div class="section-label">
         <div class="section-label-line"></div>
-        <span class="section-label-text">The Thread</span>
+        <span class="section-label-text">About</span>
       </div>
       
-      <div class="about-grid">
-        <div>
-          <h2>
-            Story, systems,<br>
-            <span class="text-primary">& journey.</span>
-          </h2>
+      <div class="about-layout">
+        <div class="about-photo">
+          <img src="headshot.jpg" alt="Joshua Weaver, founder of Pathwoven">
         </div>
         
-        <div class="about-content">
+        <div class="about-text">
+          <h2>
+            I'm Joshua.<br>
+            <span class="text-primary">I build systems people can thrive in.</span>
+          </h2>
+          
           <p>
-            15+ years of bridging the gap between hands-on coding and strategic 
-            leadership. From frontend architecture to federal systems (USDA/FNS), 
-            I've learned that the best solutions come from understanding both the 
-            technical landscape and the humans navigating it.
+            I help engineering teams integrate AI dev tooling and modernize DevOps 
+            workflows — calmly, securely, and in ways their teams can actually live with.
           </p>
+
           <p>
-            I believe in creating paths that feel natural to follow—whether that's 
-            a user interface, a team workflow, or a system architecture. Technical 
-            depth paired with genuine curiosity about people.
+            I founded Pathwoven on a simple idea: tools should serve people, not the 
+            other way around. The best engineering work extends what humans can do 
+            without turning them into appendages of their own systems. AI fits that 
+            description when it's done right. So does a clean CI/CD pipeline, a 
+            thoughtful PR workflow, or codebase context written so a senior engineer 
+            can think clearly about hard problems instead of drowning in noise.
           </p>
+
+          <p>
+            I spend a lot of time thinking about how AI coding agents change the 
+            daily reality of building software. The interesting work isn't the tools 
+            themselves — it's the question of how to weave them into systems people can 
+            actually live and work inside, especially when the codebase has history, the 
+            team has compliance obligations, and the legacy is real.
+          </p>
+
+          <p>
+            When I'm not heads-down on a codebase, I'm with my partner Amanda 
+            and our kids — usually outdoors, often watching birds, occasionally 
+            plotting our next adventure.
+          </p>
+
+          <div class="focus-areas">
+            <strong>Recent focus areas:</strong> AI dev tooling adoption strategies, 
+            multi-repo DevOps automation, CI/CD modernization, test automation 
+            reliability, and process design for compliance-sensitive teams.
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <div class="container">
+  <!-- Writing -->
+  <section id="writing" class="writing">
+    <div class="container fade-section">
       <div class="section-label">
         <div class="section-label-line"></div>
-        <span class="section-label-text">The Path Forward</span>
+        <span class="section-label-text">Writing</span>
       </div>
       
-      <div class="about-grid">
+      <h2>
+        Thinking in<br>
+        <span class="text-primary">public.</span>
+      </h2>
+
+      <p class="writing-intro">
+        Practical engineering writing — not thought leadership, not hype. 
+        Patterns and tradeoffs from work I've actually done.
+      </p>
+
+      <div class="articles-list">
+        <div class="article-card">
+          <div class="article-label">Coming Soon</div>
+          <h3>Running AI Coding Agents in a Compliance-Sensitive Codebase</h3>
+          <p>A practical playbook for the three questions compliance will actually ask — 
+            and the architecture patterns that answer them. Context engineering, 
+            audit trails, and the configuration-as-code patterns that make it work.</p>
+        </div>
+
+        <div class="article-card">
+          <div class="article-label">Coming Soon</div>
+          <h3>Multi-Agent Development: Running Claude Code and Codex CLI Side by Side</h3>
+          <p>What happens when you give two AI coding agents the same codebase, 
+            different strengths, and a shared context file. A real workflow walkthrough 
+            with honest cost and quality tradeoffs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="container fade-section">
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">Get In Touch</span>
+      </div>
+      
+      <div class="contact-grid">
         <div>
-          <h2>Let's connect.</h2>
+          <h2>Let's talk.</h2>
+          <p class="contact-text">
+            If you're trying to figure out how to bring AI tooling into your team without 
+            alarming compliance, simplify a CI/CD setup that's gotten too complicated, or 
+            rebuild a workflow your team can sustain — I'd love to hear what you're working on.
+          </p>
         </div>
         
         <div class="contact-options">
-          <a href="mailto:hello@pathwoven.com" class="contact-primary">
+          <!-- TODO: Replace # with your Calendly link -->
+          <a href="#" class="contact-primary">
+            Book a Free 30-Min Consultation
+            <span class="arrow">→</span>
+          </a>
+
+          <a href="mailto:hello@pathwoven.com" class="contact-email">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect width="20" height="16" x="2" y="4" rx="2"/>
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
-            Get in Touch
-            <span class="arrow">→</span>
+            hello@pathwoven.com
           </a>
           
           <div class="contact-secondary">
@@ -695,16 +1008,36 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
             <path d="M2 17L12 22L22 17"/>
             <path d="M2 12L12 17L22 12"/>
           </svg>
           <span>Pathwoven</span>
         </div>
-        <span class="footer-copy">Clarity through complexity.</span>
+        <span class="footer-tagline">Tools in service of humans. Systems built to thrive in.</span>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Sticky nav background on scroll
+    const nav = document.querySelector('.site-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Scroll-triggered section fade-in
+    const fadeSections = document.querySelectorAll('.fade-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeSections.forEach(section => observer.observe(section));
+  </script>
 </body>
 </html>
